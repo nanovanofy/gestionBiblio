@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Badge, Spinner, Alert, Container, Row, Col, Card, Modal, Form } from 'react-bootstrap';
+import { Table, Button, Badge, Spinner, Alert, Container, Row, Col, Card, Modal, Form, InputGroup } from 'react-bootstrap';
 import { utilisateurService } from '../services/api';
 import userIcon from '../assets/icons/user.svg';
 
 const UtilisateurList = () => {
     const [utilisateurs, setUtilisateurs] = useState([]);
+    const [filteredUtilisateurs, setFilteredUtilisateurs] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     
@@ -25,11 +27,25 @@ const UtilisateurList = () => {
         fetchUtilisateurs();
     }, []);
 
+    useEffect(() => {
+        const filtered = utilisateurs.filter(user => {
+            const search = searchTerm.toLowerCase();
+            return (
+                user.nom?.toLowerCase().includes(search) ||
+                user.prenom?.toLowerCase().includes(search) ||
+                user.email?.toLowerCase().includes(search) ||
+                user.telephone?.toLowerCase().includes(search)
+            );
+        });
+        setFilteredUtilisateurs(filtered);
+    }, [searchTerm, utilisateurs]);
+
     const fetchUtilisateurs = async () => {
         try {
             setLoading(true);
             const response = await utilisateurService.getAll();
             setUtilisateurs(response.data);
+            setFilteredUtilisateurs(response.data);
             setError(null);
         } catch (err) {
             setError('Erreur lors du chargement des utilisateurs');
@@ -137,17 +153,30 @@ const UtilisateurList = () => {
                 <Row>
                     <Col>
                         <Card>
-                            <Card.Header className="bg-primary text-white d-flex justify-content-between align-items-center">
+                            <Card.Header className="d-flex justify-content-between align-items-center flex-wrap">
                                 <div className="d-flex align-items-center">
                                     <img src={userIcon} width="30" height="30" className="me-2" alt="Utilisateurs" />
                                     <h4 className="mb-0">Liste des Utilisateurs</h4>
                                     <Badge bg="light" text="dark" className="ms-3">
-                                        {utilisateurs.length} utilisateur(s)
+                                        {filteredUtilisateurs.length} utilisateur(s)
                                     </Badge>
                                 </div>
-                                <Button variant="light" size="sm" onClick={handleShowAddModal}>
-                                    <i className="bi bi-plus-circle"></i> Nouvel Utilisateur
-                                </Button>
+                                <div className="d-flex gap-2 mt-2 mt-sm-0">
+                                    <InputGroup style={{ maxWidth: '250px' }}>
+                                        <InputGroup.Text>
+                                            <i className="bi bi-search"></i>
+                                        </InputGroup.Text>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Rechercher..."
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                        />
+                                    </InputGroup>
+                                    <Button variant="light" size="sm" onClick={handleShowAddModal}>
+                                        <i className="bi bi-plus-circle"></i> Nouveau
+                                    </Button>
+                                </div>
                             </Card.Header>
                             <Card.Body>
                                 <div className="table-responsive">
@@ -164,14 +193,14 @@ const UtilisateurList = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {utilisateurs.length === 0 ? (
+                                            {filteredUtilisateurs.length === 0 ? (
                                                 <tr>
                                                     <td colSpan="7" className="text-center">
-                                                        Aucun utilisateur trouvé
+                                                        {searchTerm ? 'Aucun utilisateur ne correspond à votre recherche' : 'Aucun utilisateur trouvé'}
                                                     </td>
                                                 </tr>
                                             ) : (
-                                                utilisateurs.map((user, index) => (
+                                                filteredUtilisateurs.map((user, index) => (
                                                     <tr key={user.id}>
                                                         <td>{index + 1}</td>
                                                         <td><strong>{user.nom}</strong></td>

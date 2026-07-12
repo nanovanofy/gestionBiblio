@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Badge, Spinner, Alert, Container, Row, Col, Card, Modal, Form } from 'react-bootstrap';
+import { Table, Button, Badge, Spinner, Alert, Container, Row, Col, Card, Modal, Form, InputGroup } from 'react-bootstrap';
 import { empruntService, livreService, utilisateurService } from '../services/api';
 import borrowIcon from '../assets/icons/borrow.svg';
 
 const EmpruntList = () => {
     const [emprunts, setEmprunts] = useState([]);
+    const [filteredEmprunts, setFilteredEmprunts] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
     const [livres, setLivres] = useState([]);
     const [utilisateurs, setUtilisateurs] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -23,6 +25,19 @@ const EmpruntList = () => {
         fetchAllData();
     }, []);
 
+    useEffect(() => {
+        const filtered = emprunts.filter(emprunt => {
+            const search = searchTerm.toLowerCase();
+            return (
+                emprunt.livre_titre?.toLowerCase().includes(search) ||
+                emprunt.livre_auteur?.toLowerCase().includes(search) ||
+                emprunt.utilisateur_nom?.toLowerCase().includes(search) ||
+                emprunt.utilisateur_prenom?.toLowerCase().includes(search)
+            );
+        });
+        setFilteredEmprunts(filtered);
+    }, [searchTerm, emprunts]);
+
     const fetchAllData = async () => {
         try {
             setLoading(true);
@@ -32,6 +47,7 @@ const EmpruntList = () => {
                 utilisateurService.getAll()
             ]);
             setEmprunts(empruntsRes.data || []);
+            setFilteredEmprunts(empruntsRes.data || []);
             setLivres(livresRes.data || []);
             setUtilisateurs(utilisateursRes.data || []);
             setError(null);
@@ -47,7 +63,7 @@ const EmpruntList = () => {
         if (window.confirm('Confirmer le retour de ce livre ?')) {
             try {
                 await empruntService.retourner(id);
-                await fetchAllData(); // Recharger les données
+                await fetchAllData();
             } catch (err) {
                 alert('Erreur lors du retour du livre');
             }
@@ -82,7 +98,7 @@ const EmpruntList = () => {
         
         try {
             await empruntService.create(formData);
-            await fetchAllData(); // Recharger les données
+            await fetchAllData();
             handleCloseModal();
         } catch (err) {
             alert('Erreur lors de la création de l\'emprunt');
@@ -95,9 +111,6 @@ const EmpruntList = () => {
     const getStatusBadge = (statut, dateRetourPrevue) => {
         if (statut === 'rendu') {
             return <Badge bg="success">Rendu</Badge>;
-        }
-        if (statut === 'retard') {
-            return <Badge bg="danger">En retard</Badge>;
         }
         const today = new Date();
         const dateRetour = new Date(dateRetourPrevue);
@@ -130,17 +143,30 @@ const EmpruntList = () => {
                 <Row>
                     <Col>
                         <Card>
-                            <Card.Header className="bg-info text-white d-flex justify-content-between align-items-center">
+                            <Card.Header className="d-flex justify-content-between align-items-center flex-wrap">
                                 <div className="d-flex align-items-center">
                                     <img src={borrowIcon} width="30" height="30" className="me-2" alt="Emprunts" />
                                     <h4 className="mb-0">Liste des Emprunts</h4>
                                     <Badge bg="light" text="dark" className="ms-3">
-                                        {emprunts.length} emprunt(s)
+                                        {filteredEmprunts.length} emprunt(s)
                                     </Badge>
                                 </div>
-                                <Button variant="light" size="sm" onClick={handleShowAddModal}>
-                                    <i className="bi bi-plus-circle"></i> Nouvel Emprunt
-                                </Button>
+                                <div className="d-flex gap-2 mt-2 mt-sm-0">
+                                    <InputGroup style={{ maxWidth: '250px' }}>
+                                        <InputGroup.Text>
+                                            <i className="bi bi-search"></i>
+                                        </InputGroup.Text>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Rechercher..."
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                        />
+                                    </InputGroup>
+                                    <Button variant="light" size="sm" onClick={handleShowAddModal}>
+                                        <i className="bi bi-plus-circle"></i> Nouveau
+                                    </Button>
+                                </div>
                             </Card.Header>
                             <Card.Body>
                                 <div className="table-responsive">
@@ -157,14 +183,14 @@ const EmpruntList = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {emprunts.length === 0 ? (
+                                            {filteredEmprunts.length === 0 ? (
                                                 <tr>
                                                     <td colSpan="7" className="text-center">
-                                                        Aucun emprunt trouvé
+                                                        {searchTerm ? 'Aucun emprunt ne correspond à votre recherche' : 'Aucun emprunt trouvé'}
                                                     </td>
                                                 </tr>
                                             ) : (
-                                                emprunts.map((emprunt, index) => (
+                                                filteredEmprunts.map((emprunt, index) => (
                                                     <tr key={emprunt.id}>
                                                         <td>{index + 1}</td>
                                                         <td>
@@ -278,7 +304,7 @@ const EmpruntList = () => {
                         <Button variant="secondary" onClick={handleCloseModal}>
                             Annuler
                         </Button>
-                        <Button variant="info" type="submit" disabled={submitting}>
+                        <Button variant="success" type="submit" disabled={submitting}>
                             {submitting ? 'Enregistrement...' : 'Ajouter l\'emprunt'}
                         </Button>
                     </Modal.Footer>

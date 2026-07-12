@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Badge, Spinner, Alert, Container, Row, Col, Card, Modal, Form } from 'react-bootstrap';
+import { Table, Button, Badge, Spinner, Alert, Container, Row, Col, Card, Modal, Form, InputGroup } from 'react-bootstrap';
 import { livreService } from '../services/api';
 import bookIcon from '../assets/icons/book.svg';
 
 const LivreList = () => {
     const [livres, setLivres] = useState([]);
+    const [filteredLivres, setFilteredLivres] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     
-        // États pour le modal
+    // États pour le modal
     const [showModal, setShowModal] = useState(false);
-    const [modalMode, setModalMode] = useState('add'); // 'add' ou 'edit'
+    const [modalMode, setModalMode] = useState('add');
     const [currentLivre, setCurrentLivre] = useState(null);
     const [formData, setFormData] = useState({
         titre: '',
@@ -29,11 +31,27 @@ const LivreList = () => {
         fetchLivres();
     }, []);
 
+    useEffect(() => {
+        // Filtrer les livres en fonction du terme de recherche
+        const filtered = livres.filter(livre => {
+            const search = searchTerm.toLowerCase();
+            return (
+                livre.titre?.toLowerCase().includes(search) ||
+                livre.auteur?.toLowerCase().includes(search) ||
+                livre.isbn?.toLowerCase().includes(search) ||
+                livre.categorie?.toLowerCase().includes(search) ||
+                livre.editeur?.toLowerCase().includes(search)
+            );
+        });
+        setFilteredLivres(filtered);
+    }, [searchTerm, livres]);
+
     const fetchLivres = async () => {
         try {
             setLoading(true);
             const response = await livreService.getAll();
             setLivres(response.data);
+            setFilteredLivres(response.data);
             setError(null);
         } catch (err) {
             setError('Erreur lors du chargement des livres');
@@ -47,7 +65,6 @@ const LivreList = () => {
         if (window.confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')) {
             try {
                 await livreService.delete(id);
-                // Mettre à jour la liste sans recharger la page
                 setLivres(livres.filter(livre => livre.id !== id));
             } catch (err) {
                 alert('Erreur lors de la suppression du livre');
@@ -92,17 +109,6 @@ const LivreList = () => {
     const handleCloseModal = () => {
         setShowModal(false);
         setCurrentLivre(null);
-        setFormData({
-            titre: '',
-            auteur: '',
-            isbn: '',
-            editeur: '',
-            annee_publication: '',
-            quantite: 1,
-            disponible: 1,
-            categorie: '',
-            description: ''
-        });
     };
 
     const handleFormChange = (e) => {
@@ -120,11 +126,9 @@ const LivreList = () => {
         try {
             if (modalMode === 'add') {
                 const response = await livreService.create(formData);
-                // Ajouter le nouveau livre à la liste
                 setLivres([response.data, ...livres]);
             } else {
                 await livreService.update(currentLivre.id, formData);
-                // Mettre à jour le livre dans la liste
                 setLivres(livres.map(l => 
                     l.id === currentLivre.id ? { ...l, ...formData } : l
                 ));
@@ -161,13 +165,29 @@ const LivreList = () => {
                 <Row>
                     <Col>
                         <Card>
-                            <Card.Header className="bg-primary text-white d-flex justify-content-between align-items-center">
+                            <Card.Header className="d-flex justify-content-between align-items-center flex-wrap">
                                 <div className="d-flex align-items-center">
                                     <img src={bookIcon} width="30" height="30" className="me-2" alt="Livres" />
                                     <h4 className="mb-0">Liste des Livres</h4>
                                     <Badge bg="light" text="dark" className="ms-3">
-                                        {livres.length} livre(s)
+                                        {filteredLivres.length} livre(s)
                                     </Badge>
+                                </div>
+                                <div className="d-flex gap-2 mt-2 mt-sm-0">
+                                    <InputGroup style={{ maxWidth: '250px' }}>
+                                        <InputGroup.Text>
+                                            <i className="bi bi-search"></i>
+                                        </InputGroup.Text>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Rechercher..."
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                        />
+                                    </InputGroup>
+                                    <Button variant="light" size="sm" onClick={handleShowAddModal}>
+                                        <i className="bi bi-plus-circle"></i> Nouveau
+                                    </Button>
                                 </div>
                             </Card.Header>
                             <Card.Body>
@@ -186,14 +206,14 @@ const LivreList = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {livres.length === 0 ? (
+                                            {filteredLivres.length === 0 ? (
                                                 <tr>
                                                     <td colSpan="8" className="text-center">
-                                                        Aucun livre trouvé
+                                                        {searchTerm ? 'Aucun livre ne correspond à votre recherche' : 'Aucun livre trouvé'}
                                                     </td>
                                                 </tr>
                                             ) : (
-                                                livres.map((livre, index) => (
+                                                filteredLivres.map((livre, index) => (
                                                     <tr key={livre.id}>
                                                         <td>{index + 1}</td>
                                                         <td><strong>{livre.titre}</strong></td>
@@ -353,7 +373,7 @@ const LivreList = () => {
                         <Button variant="secondary" onClick={handleCloseModal}>
                             Annuler
                         </Button>
-                        <Button variant="primary" type="submit" disabled={submitting}>
+                        <Button variant="success" type="submit" disabled={submitting}>
                             {submitting ? 'Enregistrement...' : modalMode === 'add' ? 'Ajouter' : 'Modifier'}
                         </Button>
                     </Modal.Footer>

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap';
 import logo from '../assets/icons/logo.svg';
-
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -32,7 +31,7 @@ const Login = () => {
     };
 
     return (
-        <Container fluid className="login-page min-vh-100 d-flex align-items-center justify-content-center">
+        <Container fluid className="login-page min-vh-100 d-flex align-items-center justify-content-center" >
             <Row className="w-100">
                 <Col md={6} lg={4} className="mx-auto">
                     <Card className="shadow-lg border-0">
