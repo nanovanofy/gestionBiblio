@@ -1,0 +1,168 @@
+.App {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.navbar-brand img {
+    filter: brightness(0) invert(1);
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-link img {
+    filter: brightness(0) invert(0.7);
+}
+
+.nav-link.active img {
+    filter: brightness(0) invert(1);
+}
+
+.card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    padding: 15px 20px;
+    border-bottom: none;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+.badge {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 20px;
+}
+
+.btn {
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.6rem;
+    font-size: 0.8rem;
+}
+
+code {
+    background-color: #f8f9fa;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+/* Animation pour les badges */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.badge.bg-danger {
+    animation: pulse 2s infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card-header h4 {
+        font-size: 1.1rem;
+    }
+    
+    .table {
+        font-size: 0.9rem;
+    }
+    
+    .btn-sm {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* Loading spinner */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+/* Styles pour la page de login */
+.login-page {
+    background: rgb(200, 181, 181);
+    min-height: 100vh;
+}
+
+.login-page .card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.login-page .card-header {
+    background: linear-gradient(135deg, #06793c 0%, #068e43 100%);
+    padding: 2rem 1rem;
+}
+
+.login-page .card-header img {
+    filter: brightness(0) invert(1);
+}
+
+.login-page .btn-primary {
+    background: rgb(6, 106, 44);
+    border: none;
+    transition: transform 0.2s;
+}
+
+.login-page .btn-primary:hover {
+    transform: scale(1.02);
+    background: rgb(2, 50, 20);
+}
+
+.login-page .btn-primary:disabled {
+    opacity: 0.7;
+}
+
+/* Styles pour les badges admin */
+.badge.bg-info {
+    background-color: #056523 !important;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+/* Animation de chargement */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Style pour les alertes */
+.alert {
+    border-radius: 10px;
+}
