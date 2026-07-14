@@ -59,7 +59,7 @@ const Login = () => {
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control
                                         type="email"
-                                        placeholder="admin@bibliotheque.com"
+                                        placeholder="ex:admin@bibliotheque.com"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         required
@@ -71,7 +71,7 @@ const Login = () => {
                                     <Form.Label>Mot de passe</Form.Label>
                                     <Form.Control
                                         type="password"
-                                        placeholder="admin123"
+                                        placeholder="........"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         required
@@ -90,8 +90,7 @@ const Login = () => {
 
                             <div className="mt-3 text-center">
                                 <small className="text-muted">
-                                    Identifiants par défaut:<br />
-                                    <strong>admin@bibliotheque.com</strong> / <strong>admin123</strong>
+                                    <a href="">Mot de passe oublié?</a>
                                 </small>
                             </div>
                         </Card.Body>
@@ -99,6 +98,8 @@ const Login = () => {
                 </Col>
             </Row>
         </Container>
+        
+
     );
 };
 

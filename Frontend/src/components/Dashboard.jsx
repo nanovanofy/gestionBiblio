@@ -103,7 +103,7 @@ const Dashboard = () => {
         </Card>
     );
 
-    const COLORS = ['#2e7d32', '#4caf50', '#66bb6a', '#81c784', '#a5d6a7', '#c8e6c9'];
+    const COLORS = ['#2e7d32', '#dddd65', '#f2b307', '#3480a6', '#a5d6a7', '#e14720'];
 
     if (loading) {
         return (
