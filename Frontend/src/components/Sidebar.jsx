@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Navbar, Nav, Container, Button } from 'react-bootstrap';
-import logo from '../assets/icons/logo.svg';
+import { Nav, Button } from 'react-bootstrap';
+import logo from '../assets/icons/logo.png';
 import bookIcon from '../assets/icons/book.svg';
 import userIcon from '../assets/icons/user.svg';
 import borrowIcon from '../assets/icons/borrow.svg';
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
-    const { adminUser, logout } = useAuth();
+    const { logout } = useAuth();
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -39,18 +39,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <div className={`sidebar ${isOpen ? 'sidebar-open' : ''}`}>
                 <div className="sidebar-header">
                     <img src={logo} alt="Logo" className="sidebar-logo" />
-                    <h5 className="sidebar-title">Bibliothèque</h5>
+                    <h5 className="sidebar-title">Library</h5>
                 </div>
 
-                <div className="sidebar-user">
-                    <div className="sidebar-avatar">
-                        {adminUser?.prenom?.[0]}{adminUser?.nom?.[0]}
-                    </div>
-                    <div className="sidebar-user-info">
-                        <strong>{adminUser?.prenom} {adminUser?.nom}</strong>
-                        <small>{adminUser?.email}</small>
-                    </div>
-                </div>
+                
 
                 <Nav className="sidebar-nav flex-column">
                     <Nav.Link as={NavLink} to="/dashboard" className="sidebar-link">

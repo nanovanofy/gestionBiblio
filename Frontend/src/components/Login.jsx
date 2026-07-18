@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap';
-import logo from '../assets/icons/logo.svg';
+import logo from '../assets/icons/logo.png';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -45,7 +45,7 @@ const Login = () => {
                                 style={{ filter: 'brightness(0) invert(1)' }}
                             />
                             <h3 className="mb-0">Gestion de Bibliothèque</h3>
-                            <small>Administration</small>
+                           
                         </Card.Header>
                         <Card.Body className="p-4">
                             {error && (
