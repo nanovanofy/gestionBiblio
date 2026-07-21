@@ -1,0 +1,176 @@
+:root {
+    /* Couleurs de fond */
+    --bg-primary: #f5faf5;
+    --bg-secondary: #ffffff;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f8f9fa;
+    --bg-input: #ffffff;
+    --bg-table-stripe: #f8f9fa;
+    --bg-table-hover: #e8f5e9;
+    --bg-sidebar: linear-gradient(180deg, #1b5e20 0%, #2e7d32 50%, #388e3c 100%);
+    --bg-header: linear-gradient(135deg, #2e7d32, #43a047);
+    --bg-modal: #ffffff;
+    --bg-dropdown: #ffffff;
+    
+    /* Couleurs de texte */
+    --text-primary: #1a1a1a;
+    --text-secondary: #495057;
+    --text-muted: #6c757d;
+    --text-white: #ffffff;
+    --text-green: #2e7d32;
+    --text-dark: #1b5e20;
+    --text-link: #2e7d32;
+    
+    /* Couleurs de bordure */
+    --border-primary: #dee2e6;
+    --border-green: #c8e6c9;
+    --border-dark: #a5d6a7;
+    --border-input: #e0e0e0;
+    
+    /* Ombres */
+    --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --shadow-card-hover: 0 6px 25px rgba(0, 0, 0, 0.12);
+    --shadow-sidebar: 4px 0 20px rgba(0, 0, 0, 0.2);
+    --shadow-dropdown: 0 4px 20px rgba(0, 0, 0, 0.15);
+    --shadow-green: rgba(46, 125, 50, 0.3);
+    
+    /* Couleurs des alertes */
+    --alert-success-bg: #e8f5e9;
+    --alert-success-border: #c8e6c9;
+    --alert-success-text: #1b5e20;
+    --alert-danger-bg: #fde8e8;
+    --alert-danger-border: #f5c6cb;
+    --alert-danger-text: #721c24;
+    
+    /* Couleurs des badges */
+    --badge-success: #2e7d32;
+    --badge-danger: #dc3545;
+    --badge-warning: #ffc107;
+    --badge-info: #17a2b8;
+    
+    /* Scrollbar */
+    --scrollbar-track: #f1f1f1;
+    --scrollbar-thumb: #2e7d32;
+    
+    /* Overlay */
+    --overlay-color: rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================
+   THÈME SOMBRE
+   ============================================ */
+
+[data-theme="dark"] {
+    /* Couleurs de fond */
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --bg-card: #1e2a4a;
+    --bg-card-hover: #253a5e;
+    --bg-input: #2a3f6a;
+    --bg-table-stripe: #1e2a4a;
+    --bg-table-hover: #2a3f6a;
+    --bg-sidebar: linear-gradient(180deg, #0d1b2a 0%, #1a2a3a 50%, #1e3a4a 100%);
+    --bg-header: linear-gradient(135deg, #0d1b2a, #1a3a4a);
+    --bg-modal: #1e2a4a;
+    --bg-dropdown: #1e2a4a;
+    
+    /* Couleurs de texte */
+    --text-primary: #e8e8e8;
+    --text-secondary: #b0b0b0;
+    --text-muted: #888888;
+    --text-white: #ffffff;
+    --text-green: #66bb6a;
+    --text-dark: #a5d6a7;
+    --text-link: #66bb6a;
+    
+    /* Couleurs de bordure */
+    --border-primary: #2a3f6a;
+    --border-green: #2a4a3a;
+    --border-dark: #1a3a2a;
+    --border-input: #2a3f6a;
+    
+    /* Ombres */
+    --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.4);
+    --shadow-card-hover: 0 6px 25px rgba(0, 0, 0, 0.5);
+    --shadow-sidebar: 4px 0 20px rgba(0, 0, 0, 0.4);
+    --shadow-dropdown: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --shadow-green: rgba(46, 125, 50, 0.2);
+    
+    /* Couleurs des alertes */
+    --alert-success-bg: #1a3a2a;
+    --alert-success-border: #2a4a3a;
+    --alert-success-text: #a5d6a7;
+    --alert-danger-bg: #3a1a1a;
+    --alert-danger-border: #4a2a2a;
+    --alert-danger-text: #f5a5a5;
+    
+    /* Couleurs des badges */
+    --badge-success: #4caf50;
+    --badge-danger: #ef5350;
+    --badge-warning: #ffd54f;
+    --badge-info: #4dd0e1;
+    
+    /* Scrollbar */
+    --scrollbar-track: #1a1a2e;
+    --scrollbar-thumb: #4caf50;
+    
+    /* Overlay */
+    --overlay-color: rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================
+   MODE COMPACT
+   ============================================ */
+
+.compact-mode .card-header {
+    padding: 10px 15px !important;
+}
+
+.compact-mode .card-body {
+    padding: 10px 15px !important;
+}
+
+.compact-mode .table td,
+.compact-mode .table th {
+    padding: 6px 8px !important;
+    font-size: 0.85rem;
+}
+
+.compact-mode .form-control,
+.compact-mode .form-select {
+    padding: 6px 10px !important;
+    font-size: 0.85rem;
+}
+
+.compact-mode .btn {
+    padding: 4px 12px !important;
+    font-size: 0.85rem;
+}
+
+.compact-mode .sidebar-link {
+    padding: 8px 12px !important;
+    font-size: 0.85rem;
+}
+
+/* ============================================
+   DÉSACTIVATION DES ANIMATIONS
+   ============================================ */
+
+.no-animations * {
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+    animation: none !important;
+    transition: none !important;
+}
+
+.no-animations .sidebar {
+    transition: none !important;
+}
+
+.no-animations .card:hover {
+    transform: none !important;
+}
+
+.no-animations .btn:hover {
+    transform: none !important;
+}

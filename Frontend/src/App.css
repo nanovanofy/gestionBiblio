@@ -1,5 +1,5 @@
 /* ============================================
-   THEME VERT - Gestion de Bibliothèque
+   THEME VERT - LIBRARY
    ============================================ */
 
 /* --- Variables du thème vert --- */
@@ -68,28 +68,6 @@
     font-weight: 700;
     margin: 0;
     font-size: 1.2rem;
-}
-
-.sidebar-user {
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.sidebar-avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .sidebar-user-info {
@@ -861,5 +839,278 @@ textarea.form-control {
     .btn-sm {
         padding: 0.2rem 0.5rem;
         font-size: 0.7rem;
+    }
+}
+/* Adaptations pour le mode sombre */
+[data-theme="dark"] .card {
+    background: var(--bg-card) !important;
+    border-color: var(--border-primary) !important;
+}
+
+[data-theme="dark"] .card-header {
+    background: var(--bg-header) !important;
+}
+
+[data-theme="dark"] .table {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .table thead th {
+    background: var(--bg-table-stripe) !important;
+    color: var(--text-green) !important;
+}
+
+[data-theme="dark"] .table tbody tr {
+    border-color: var(--border-primary) !important;
+}
+
+[data-theme="dark"] .table tbody tr:hover {
+    background: var(--bg-table-hover) !important;
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select {
+    background: var(--bg-input) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-input) !important;
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-select:focus {
+    background: var(--bg-input) !important;
+    border-color: var(--text-green) !important;
+}
+
+[data-theme="dark"] .form-label {
+    color: var(--text-green) !important;
+}
+
+[data-theme="dark"] .modal-content {
+    background: var(--bg-modal) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .modal-header {
+    background: var(--bg-header) !important;
+}
+
+[data-theme="dark"] .modal-footer {
+    border-color: var(--border-primary) !important;
+}
+
+[data-theme="dark"] .dropdown-menu {
+    background: var(--bg-dropdown) !important;
+    border-color: var(--border-primary) !important;
+}
+
+[data-theme="dark"] .dropdown-item {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+    background: var(--bg-card-hover) !important;
+}
+
+[data-theme="dark"] .alert-success {
+    background: var(--alert-success-bg) !important;
+    border-color: var(--alert-success-border) !important;
+    color: var(--alert-success-text) !important;
+}
+
+[data-theme="dark"] .alert-danger {
+    background: var(--alert-danger-bg) !important;
+    border-color: var(--alert-danger-border) !important;
+    color: var(--alert-danger-text) !important;
+}
+
+[data-theme="dark"] .badge.bg-success {
+    background: var(--badge-success) !important;
+}
+
+[data-theme="dark"] .badge.bg-danger {
+    background: var(--badge-danger) !important;
+}
+
+[data-theme="dark"] .badge.bg-warning {
+    background: var(--badge-warning) !important;
+}
+
+[data-theme="dark"] .badge.bg-info {
+    background: var(--badge-info) !important;
+}
+
+[data-theme="dark"] .stat-card .text-muted {
+    color: var(--text-green) !important;
+}
+
+[data-theme="dark"] .stat-card .fw-bold {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .login-card {
+    background: rgba(30, 42, 74, 0.95) !important;
+}
+
+[data-theme="dark"] .login-card h2 {
+    color: var(--text-green) !important;
+}
+
+[data-theme="dark"] .login-card .form-control {
+    background: var(--bg-input) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .login-card .text-muted {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .sidebar {
+    background: var(--bg-sidebar) !important;
+}
+
+[data-theme="dark"] .main-content {
+    background: var(--bg-primary) !important;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track) !important;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb) !important;
+}
+
+[data-theme="dark"] .stat-icon img {
+    filter: brightness(0) invert(0.7);
+}
+/*icons svg*/
+.icon-svg {
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+/* Filtres pour le mode sombre */
+[data-theme="dark"] .icon-svg {
+    filter: brightness(0.8) invert(1);
+}
+
+[data-theme="dark"] .icon-svg[color="#2e7d32"] {
+    filter: brightness(0.8) sepia(1) hue-rotate(80deg) saturate(3);
+}
+
+/* Icônes dans les badges */
+.badge .icon-svg {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* Icônes dans les boutons */
+.btn .icon-svg {
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+.btn .icon-svg:last-child {
+    margin-right: 0;
+    margin-left: 4px;
+}
+
+/* Animations des icônes */
+.icon-svg:hover {
+    transform: scale(1.1);
+}
+
+.tab-pane .icon-svg {
+    transition: none;
+}
+
+/* Icônes dans les switches */
+.form-switch .icon-svg {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+/* Responsive des icônes */
+@media (max-width: 768px) {
+    .icon-svg {
+        width: 18px !important;
+        height: 18px !important;
+    }
+}
+/* ============================================
+   STYLES POUR L'ŒIL DU MOT DE PASSE
+   ============================================ */
+
+/* Style du bouton de l'œil */
+.input-group .btn-outline-secondary {
+    border-color: #ced4da;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    padding: 0 15px;
+}
+
+.input-group .btn-outline-secondary:hover {
+    background-color: #f8f9fa;
+    border-color: #ced4da;
+}
+
+.input-group .btn-outline-secondary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(46, 125, 50, 0.25);
+    border-color: #2e7d32;
+}
+
+/* Icône de l'œil */
+.input-group .btn-outline-secondary i {
+    font-size: 1.1rem;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.input-group .btn-outline-secondary:hover i {
+    color: #2e7d32;
+}
+
+/* Animation de l'icône */
+.input-group .btn-outline-secondary i {
+    transition: transform 0.3s ease;
+}
+
+.input-group .btn-outline-secondary:hover i {
+    transform: scale(1.1);
+}
+
+/* Style pour le mode sombre */
+[data-theme="dark"] .input-group .btn-outline-secondary {
+    background-color: var(--bg-input);
+    border-color: var(--border-input);
+}
+
+[data-theme="dark"] .input-group .btn-outline-secondary i {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .input-group .btn-outline-secondary:hover {
+    background-color: var(--bg-card-hover);
+}
+
+[data-theme="dark"] .input-group .btn-outline-secondary:hover i {
+    color: var(--text-green);
+}
+
+/* Effet de focus sur le groupe input */
+.input-group:focus-within .btn-outline-secondary {
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 0.2rem rgba(46, 125, 50, 0.25);
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+    .input-group .btn-outline-secondary {
+        padding: 0 12px;
+    }
+    
+    .input-group .btn-outline-secondary i {
+        font-size: 1rem;
     }
 }

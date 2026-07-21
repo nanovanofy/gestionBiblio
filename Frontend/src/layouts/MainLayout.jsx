@@ -11,7 +11,6 @@ const MainLayout = ({ children }) => {
 
     return (
         <div className="main-layout">
-            {/* Bouton hamburger pour mobile */}
             <Button 
                 variant="success" 
                 className="sidebar-toggle-btn"
@@ -20,10 +19,8 @@ const MainLayout = ({ children }) => {
                 <i className="bi bi-list"></i>
             </Button>
 
-            {/* Sidebar */}
             <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
-            {/* Contenu principal */}
             <div className={`main-content ${sidebarOpen ? 'main-content-shifted' : ''}`}>
                 <Container fluid className="main-container">
                     {children}

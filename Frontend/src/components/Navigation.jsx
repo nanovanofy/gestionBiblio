@@ -33,7 +33,7 @@ const Navigation = () => {
                         alt="Logo Bibliothèque"
                         style={{ filter: 'brightness(0) invert(1)' }}
                     />
-                    <span>Gestion de Bibliothèque</span>
+                    <span>LIBRARY</span>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

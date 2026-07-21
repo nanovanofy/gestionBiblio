@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="220" height="220">
+
+    <!-- Hexagone extérieur -->
+    <polygon
+        points="110,10 190,55 190,165 110,210 30,165 30,55"
+        fill="none"
+        stroke="#66d14b"
+        stroke-width="5"/>
+
+    <!-- Hexagone intérieur -->
+    <polygon
+        points="110,20 180,60 180,160 110,200 40,160 40,60"
+        fill="none"
+        stroke="#66d14b"
+        stroke-width="2"/>
+
+    <!-- Livre 1 -->
+    <g fill="#0b7a3a">
+        <rect x="78" y="82" width="22" height="55"/>
+        <rect x="78" y="75" width="22" height="5"/>
+        <rect x="80" y="90" width="15" height="3" fill="#ffffff"/>
+        <rect x="78" y="132" width="22" height="3" fill="#ffffff"/>
+    </g>
+
+    <!-- Livre 2 -->
+    <g fill="#0b7a3a">
+        <rect x="104" y="66" width="22" height="71"/>
+        <rect x="104" y="59" width="22" height="5"/>
+        <rect x="104" y="132" width="22" height="3" fill="#ffffff"/>
+    </g>
+
+    <!-- Livre 3 incliné -->
+    <g transform="translate(145 82) rotate(-12)">
+        <rect x="-11" y="0" width="22" height="55" fill="#0b7a3a"/>
+        <rect x="-11" y="-7" width="22" height="5" fill="#0b7a3a"/>
+        <rect x="-11" y="38" width="22" height="3" fill="#ffffff"/>
+        <rect x="-11" y="48" width="22" height="3" fill="#ffffff"/>
+    </g>
+
+</svg>
